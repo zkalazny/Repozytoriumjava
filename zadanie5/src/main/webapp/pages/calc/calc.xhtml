@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="jakarta.faces.facelets"
+	xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core">
+
+<ui:composition template="/templates/main-template.xhtml">
+
+	<ui:define name="title">
+		JSF 05 - kalkulator kredytowy
+	</ui:define>
+
+	<ui:define name="content">
+
+		<h:form>
+			<h:panelGrid columns="2" cellpadding="5" styleClass="bottom-space">
+				<h:outputLabel for="idx" value="Kwota:" />
+				<h:inputText id="idx" value="#{kredytBB.x}" required="true"
+					requiredMessage="podaj x" converterMessage="niepoprawny format x" />
+				<h:outputLabel for="idy" value="Okres czasu:" />
+				<h:inputText id="idy" value="#{kredytBB.y}" required="true"
+					requiredMessage="podaj y" converterMessage="niepoprawny format y" />
+				<h:outputLabel for="idz" value="Oprocentowanie:" />
+				<h:inputText id="idz" value="#{kredytBB.z}" required="true"
+					requiredMessage="podaj z" converterMessage="niepoprawny format z" />
+				<h:commandButton value="Dodaj" action="#{kredytBB.calc()}"
+					update="msg" />
+			</h:panelGrid>
+		</h:form>
+
+		<h:messages id="msg" />
+
+	</ui:define>
+
+</ui:composition>
+</html>
