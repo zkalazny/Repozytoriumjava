@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/templates/page-template.xhtml">
+
+	<ui:define name="pageContent">
+
+		<p:panel header="Kalkulator kredytowy">
+
+			<p:messages id="msg" />
+
+			<h:form>
+				<h:panelGrid columns="3" cellpadding="5" styleClass="bottom-space">
+					<p:outputLabel for="idx" value="Kwota:" />
+					<p:inputText value="#{kredytBB.x}" 
+									required="true" 
+									requiredMessage="Wymagane jest podanie kwoty."
+									converterMessage="Kwota musi być liczbą." 
+									validatorMessage="Wartość kwoty być większa niz 1000."
+									id="idx">
+								<f:validateDoubleRange minimum="1000"/>					
+					</p:inputText>
+					<p:message for="idx"/>
+					
+					<p:outputLabel for="idy" value="Okres czasu w latach:" />
+					<p:inputText value="#{kredytBB.y}" 
+									required="true" 
+									requiredMessage="Wymagane jest podanie okresu czasu."
+									converterMessage="Okres czasu musi być liczbą." 
+									validatorMessage="Wprowadzony okres czasu musi mieścić się w zakresie od 1 roku do 15 lat."									
+									id="idy">
+								<f:validateLongRange minimum="1" maximum="15"/>						
+					</p:inputText>
+					<p:message for="idy"/>
+					
+					<p:outputLabel for="idz" value="Oprocentowanie(%):" />
+					<p:inputText value="#{kredytBB.z}" 
+									required="true" 
+									requiredMessage="Wymagane jest podanie oprocentowania."
+									converterMessage="Oprocentowanie musi być liczbą." 
+									validatorMessage="Oprocentowanie musi być w zakresie od 5% do 20%."
+									id="idz">
+								<f:validateLongRange minimum="5" maximum="20"/>	
+					</p:inputText>
+					<p:message for="idz"/>
+								
+					<p:commandButton value="Dodaj" action="#{kredytBB.calc()}" update="msg" />
+				</h:panelGrid>
+				<p:commandLink value="Informacje" action="#{kredytBB.info()}" />
+			</h:form>
+
+		</p:panel>
+
+	</ui:define>
+
+</ui:composition>
+</html>
