@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="jakarta.faces.facelets"
+	xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core">
+
+<ui:composition template="/templates/main-template.xhtml">
+
+	<ui:define name="title">
+		JSF 05 - filtry, ochrona zasobów
+	</ui:define>
+
+	<ui:define name="content">
+
+		<h:form>
+			<h:panelGrid columns="2" cellpadding="5" styleClass="bottom-space">
+				
+				<h:outputLabel for="kwota" value="Kwota:" />
+				<h:inputText id="idx" value="#{kredytBB.x}"
+					required="true"	requiredMessage="podaj kwotę"/>
+				<h:outputLabel for="okres czasu" value="Okres czasu:" />
+				<h:inputText id="idy" value="#{kredytBB.y}"
+					required="true"	requiredMessage="podaj ilość lat"/>
+				<h:outputLabel for="oprocentowanie" value="Oprocentowanie:" />
+				<h:inputText id="idz" value="#{kredytBB.z}"
+					required="true"	requiredMessage="podaj wartość oprocentowania"/>
+			
+				<h:commandButton value="Dodaj" action="#{kredytBB.calc()}">
+					<f:ajax execute="@form" render="msg" />
+				</h:commandButton>
+				
+			</h:panelGrid>
+		</h:form>
+
+		<h:messages id="msg" />
+
+	</ui:define>
+
+</ui:composition>
+</html>
